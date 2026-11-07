@@ -4,13 +4,14 @@
 
 This repository contains a **light‑weight, enterprise‑grade chatbot** built on top of a **FastAPI** backend that can talk to multiple LLM providers (Mistral, OpenRouter, HuggingFace, etc.) and a **modern, Claude‑style UI** that launches via a double‑click on `index.html` or the convenience batch file `Launch Chatbot.bat`.
 
-The UI is **minimalist, responsive, and fully theme‑light**, with a persona selector that lets you switch the system prompt on‑the‑fly (funny, angry, sad). All chat history is stored locally in the browser (via `localStorage`) and can be re‑opened from the sidebar.
+The UI is **minimalist, responsive, and fully theme‑light**, with a persona selector that lets you switch the system prompt on‑the-fly (funny, angry, sad). All chat history is stored locally in the browser (via `localStorage`) and can be re‑opened from the sidebar.
 
 ---
 
-## 🚀 Demo
+## 🚀 Live Demo
 
-- **Live Web Application**: [View Live Demo on GitHub Pages](https://prathambaraskar.github.io/Basic-Generative-Text-Generation-Chatbot-Using-Multiple-Providers/)
+Experience the live interactive application directly in your browser:
+🔗 **[https://prathambaraskar.github.io/Basic-Generative-Text-Generation-Chatbot-Using-Multiple-Providers/](https://prathambaraskar.github.io/Basic-Generative-Text-Generation-Chatbot-Using-Multiple-Providers/)**
 
 ---
 
