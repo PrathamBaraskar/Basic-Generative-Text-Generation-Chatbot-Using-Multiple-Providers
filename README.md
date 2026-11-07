@@ -8,6 +8,12 @@ The UI is **minimalist, responsive, and fully theme‑light**, with a persona se
 
 ---
 
+## 🚀 Demo
+
+- **Live Web Application**: [View Live Demo on GitHub Pages](https://prathambaraskar.github.io/Basic-Generative-Text-Generation-Chatbot-Using-Multiple-Providers/)
+
+---
+
 ## ✨ Features
 
 | Feature | Description |
