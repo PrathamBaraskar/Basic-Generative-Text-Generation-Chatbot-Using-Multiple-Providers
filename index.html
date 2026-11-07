@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistral AI — Intelligent & Witty Assistant</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="brand-title">Mistral AI</span>
+                <button class="tool-btn" title="Toggle Sidebar">
+                    <i data-lucide="panel-left-close" size="18"></i>
+                </button>
+            </div>
+
+            <button id="new-chat-btn" class="new-chat-btn">
+                <i data-lucide="square-pen" size="16"></i>
+                <span>Start new chat</span>
+            </button>
+
+            <!-- Persona Selector -->
+            <div class="persona-section" style="margin-top: 1rem; padding: 0.5rem 0.75rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px;">
+                <label for="persona-select" style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 0.35rem;">AI Persona Mode</label>
+                <select id="persona-select" style="width: 100%; padding: 0.4rem; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-sidebar); font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-main); outline: none; cursor: pointer;">
+                    <option value="funny" selected>😄 Funny Agent</option>
+                    <option value="angry">😡 Angry & Impatient Agent</option>
+                    <option value="sad">😢 Sad & Depressed Agent</option>
+                </select>
+            </div>
+
+            <div class="sidebar-search">
+                <i data-lucide="search" size="15"></i>
+                <span>Search chats</span>
+                <kbd>Ctrl K</kbd>
+            </div>
+
+            <div class="sidebar-nav">
+                <a href="#" class="nav-item">
+                    <i data-lucide="folder-kanban" size="17"></i>
+                    <span>Projects</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="library" size="17"></i>
+                    <span>Artifacts</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="settings" size="17"></i>
+                    <span>Customize</span>
+                </a>
+            </div>
+
+            <div class="recents-header">Recent Chats</div>
+            <div id="recents-list" class="recents-list">
+                <!-- Populated dynamically from localStorage -->
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">P</div>
+                    <span>Pratham · Free</span>
+                </div>
+                <button class="tool-btn" title="Settings">
+                    <i data-lucide="settings" size="16"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Landing Hero View (Centered Input) -->
+            <section id="landing-hero" class="landing-hero">
+                <h1 class="hero-title">
+                    <i data-lucide="sparkles" size="32"></i>
+                    <span id="greeting-el">Back at it, Pratham</span>
+                </h1>
+
+                <!-- Floating Input Box -->
+                <form id="chat-form" class="chat-input-box">
+                    <textarea
+                        id="user-input"
+                        class="chat-textarea"
+                        placeholder="How can Mistral help you today?"
+                        rows="1"
+                        required
+                    ></textarea>
+
+                    <div class="input-toolbar">
+                        <div class="toolbar-left">
+                            <button type="button" class="tool-btn" title="Attach file or image">
+                                <i data-lucide="paperclip" size="18"></i>
+                            </button>
+                        </div>
+                        <div class="toolbar-right">
+                            <button type="button" class="tool-btn" title="Voice dictation">
+                                <i data-lucide="mic" size="18"></i>
+                            </button>
+                            <button type="submit" class="send-action-btn" title="Send message">
+                                <i data-lucide="arrow-up" size="16"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="input-footer-info">
+                    <div class="info-dropdown">
+                        <span id="current-model-label">ministral-3b-2512</span>
+                        <i data-lucide="chevron-down" size="14"></i>
+                    </div>
+                    <div class="info-dropdown">
+                        <span id="current-persona-badge">😄 Funny Agent</span>
+                        <i data-lucide="chevron-down" size="14"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Active Chat Messages View (Hidden initially) -->
+            <div id="chat-messages-container" class="chat-messages-container">
+                <!-- Messages appended dynamically -->
+            </div>
+
+            <!-- Active Bottom Input Wrapper (Hidden initially) -->
+            <div id="active-input-wrapper" class="active-input-wrapper">
+                <div class="active-input-inner">
+                    <form id="chat-form-active" class="chat-input-box">
+                        <textarea
+                            id="user-input-active"
+                            class="chat-textarea"
+                            placeholder="Reply to Mistral..."
+                            rows="1"
+                            required
+                        ></textarea>
+                        <div class="input-toolbar">
+                            <div class="toolbar-left">
+                                <button type="button" class="tool-btn" title="Attach file">
+                                    <i data-lucide="paperclip" size="18"></i>
+                                </button>
+                            </div>
+                            <div class="toolbar-right">
+                                <button type="submit" class="send-action-btn" title="Send message">
+                                    <i data-lucide="arrow-up" size="16"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript script -->
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
